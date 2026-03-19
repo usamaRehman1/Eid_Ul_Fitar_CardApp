@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak | Alwida Ramadan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="bg-emerald-950 text-emerald-50 min-h-screen font-sans">
+
+    <body class="bg-emerald-950 text-emerald-50 min-h-screen font-sans overflow-x-hidden">
+
+        <div id="welcome-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950 px-4">
+            <div
+                class="bg-emerald-900 p-8 rounded-2xl shadow-2xl border border-yellow-500/50 max-w-md w-full text-center">
+                <h2 class="text-3xl font-bold text-yellow-400 mb-6">Eid Mubarak! 🌙</h2>
+                <p class="mb-6 text-emerald-200">Before we begin, tell us who you are:</p>
+                <input type="text" id="user-name-input" placeholder="Your Name"
+                    class="w-full p-3 mb-4 rounded bg-emerald-800 border border-emerald-600 focus:ring-2 focus:ring-yellow-500 outline-none">
+                <select id="user-relation-input"
+                    class="w-full p-3 mb-6 rounded bg-emerald-800 border border-emerald-600 outline-none">
+                    <option value="Friend">Friend</option>
+                    <option value="Family">Family Member</option>
+                    <option value="Colleague">Colleague</option>
+                    <option value="Bestie">Best Friend</option>
+                    <option value="Bestie">Student</option>
+                </select>
+                <button id="startExperience"
+                    class="w-full bg-yellow-500 hover:bg-yellow-400 text-emerald-950 font-bold py-3 rounded-lg transition-transform active:scale-95">
+                    Enter Experience
+                </button>
+            </div>
+        </div>
+
+        <main id="main-content" class="opacity-0 transition-opacity duration-1000">
+
+            <div id="hero"
+                class="relative h-80 bg-cover bg-center flex flex-col items-center justify-center shadow-2xl border-b border-emerald-800"
+                style="background-image: url('https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains.jpg');">
+
+                <div class="absolute inset-0 bg-black/50"></div>
+
+                <div class="relative text-center z-10 px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                        Eid Mubarak 🌙
+                    </h1>
+
+                    <div class="max-w-2xl mx-auto space-y-2">
+                        <p class="arabic-text text-2xl md:text-3xl text-yellow-400 leading-relaxed">
+                            فَإِنَّ مَعَ الْعُسْرِ يُسْرًا • إِنَّ مَعَ الْعُسْرِ يُسْرًا
+                        </p>
+                        <p class="text-sm md:text-base text-emerald-100 italic font-light tracking-wide">
+                            "For indeed, with hardship [will be] ease. Indeed, with hardship [will be] ease."
+                            <span class="block text-[10px] uppercase mt-1 text-emerald-400 font-bold">— Surah Ash-Sharh
+                                [94:5-6]</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="py-10 text-center">
+                <h2 class="text-xl text-emerald-300 mb-4 uppercase tracking-widest">Alwida Ramadan Countdown</h2>
+                <div id="countdown" class="flex justify-center gap-4 text-2xl md:text-4xl font-mono">
+                    <div class="bg-emerald-800 p-4 rounded-lg"><span id="days">00</span>
+                        <p class="text-xs">Days</p>
+                    </div>
+                    <div class="bg-emerald-800 p-4 rounded-lg"><span id="hours">00</span>
+                        <p class="text-xs">Hrs</p>
+                    </div>
+                    <div class="bg-emerald-800 p-4 rounded-lg"><span id="mins">00</span>
+                        <p class="text-xs">Min</p>
+                    </div>
+                    <div class="bg-emerald-800 p-4 rounded-lg"><span id="secs">00</span>
+                        <p class="text-xs">Sec</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-12 text-center">
+                <div id="gift-container" class="cursor-pointer group">
+                    <div class="text-8xl animate-bounce">🎁</div>
+                    <p class="text-yellow-400 font-bold mt-4">Open your personalized Eid Gift!</p>
+                </div>
+            </section>
+
+            <div id="ai-modal"
+                class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+                <div
+                    class="bg-emerald-900 border-2 border-yellow-500 p-8 rounded-3xl max-w-lg w-full text-center relative">
+                    <button onclick="closeAiModal()" class="absolute top-4 right-4 text-2xl">✕</button>
+                    <h3 class="text-2xl font-bold text-yellow-400 mb-4">A Special Prayer for You</h3>
+                    <div id="ai-loading" class="hidden animate-pulse">✨ Writing a blessed message...</div>
+                    <p id="ai-generated-text" class="text-xl italic leading-relaxed"></p>
+                    <p id="ai-relation-tag" class="mt-4 text-emerald-400 font-bold"></p>
+                </div>
+            </div>
+
+            <div class="text-center py-20">
+                <button onclick="openGalleryLock()"
+                    class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-emerald-950 px-8 py-4 rounded-full font-black text-xl shadow-xl hover:scale-110 transition-all">
+                    🔓 View Usama's Eid Gallery
+                </button>
+            </div>
+        </main>
+
+        <div id="gallery-lock-modal"
+            class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-emerald-950 p-4">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-6">Restricted Area 🔒</h2>
+                <p class="mb-4">Enter the Secret Key to see the journey</p>
+                <input type="password" id="gallery-key"
+                    class="p-3 rounded bg-emerald-800 border border-yellow-500 text-center text-xl mb-4"
+                    placeholder="Enter Key">
+                <div id="key-error" class="hidden text-red-400 mb-4 text-sm">Wrong key! Contact Usama to get it.</div>
+                <button onclick="checkKey()"
+                    class="bg-yellow-500 text-emerald-900 px-6 py-2 rounded font-bold">Unlock</button>
+            </div>
+        </div>
+
+
+        <section class="max-w-4xl mx-auto px-6 py-12">
+            <h2 class="text-2xl font-semibold mb-6 text-yellow-400 text-center">Community Prayer Wall ✍️</h2>
+
+            <div class="bg-emerald-900/50 p-6 rounded-2xl border border-emerald-700 mb-8">
+                <div class="flex flex-col gap-3">
+                    <input type="text" id="user-name" placeholder="Your Name"
+                        class="px-4 py-2 rounded-lg bg-emerald-950 border border-emerald-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    <textarea id="user-message" placeholder="Write a prayer or Eid wish..." rows="2"
+                        class="px-4 py-2 rounded-lg bg-emerald-950 border border-emerald-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                    <button id="send-msg-btn"
+                        class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg transition-all">
+                        Post Wish
+                    </button>
+                </div>
+            </div>
+
+            <div id="messages-container" class="space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                <p class="text-center text-emerald-400 animate-pulse">Loading wishes...</p>
+            </div>
+        </section>
+    </body>
+
+
+    <script type="module" src="app.js"></script>
+
+</html>
